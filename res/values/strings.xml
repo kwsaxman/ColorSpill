@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">ColorSpill</string>
+    <string name="welcome">Welcome</string>
+    <string name="new_game">New Game</string>
+    <string name="menu">Menu</string>
+    <string name="high_scores">High Scores</string>
+    <string name="timed_game">Timed Game</string>
+    <string name="normal_game">Normal Game</string>
+
+</resources>

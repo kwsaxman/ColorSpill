@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/normal_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onNormalGameClick"
+        android:text="@+string/normal_game" />
+
+    <Button
+        android:id="@+id/timed_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTimedGameClick"
+        android:text="@+string/timed_game" />
+
+    <Button
+        android:id="@+id/high_scores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onHighScoresClick"
+        android:text="@+string/high_scores" />
+
+</LinearLayout>       

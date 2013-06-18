@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/statusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="@+string/welcome"/>
+
+    <com.kws.ColorSpill.GameView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/colorSpillView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+    
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/y_padding" >
+
+        <Button
+            android:id="@+id/Yellow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onYellowClick" />
+
+        <Button
+            android:id="@+id/Red"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onRedClick" />
+
+        <Button
+            android:id="@+id/White"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onWhiteClick" />
+
+        <Button
+            android:id="@+id/Magenta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onMagentaClick" />
+
+        <Button
+            android:id="@+id/Green"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onGreenClick" />
+
+        <Button
+            android:id="@+id/Blue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onBlueClick" />
+    </LinearLayout>
+        
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/y_padding" >
+        
+        <Button
+            android:id="@+id/newGame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onNewGameClick"
+            android:text="@+string/new_game" />
+        
+        <Button
+            android:id="@+id/menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:onClick="onNewGameClick"
+            android:text="@+string/menu" />
+        
+    </LinearLayout>
+</LinearLayout>       
