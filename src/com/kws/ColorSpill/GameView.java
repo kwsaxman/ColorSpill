@@ -22,7 +22,7 @@ import java.util.Observer;
 public class GameView
     extends View
 {
-    private ColorSpill model;
+    private Game model;
 
 
     // ----------------------------------------------------------
@@ -46,7 +46,7 @@ public class GameView
      *
      * @return - the model
      */
-    public ColorSpill getModel()
+    public Game getModel()
     {
         return model;
     }
@@ -60,7 +60,7 @@ public class GameView
      * @param theModel
      *            the ColorSpill
      */
-    public void setModel(ColorSpill theModel)
+    public void setModel(Game theModel)
     {
         model = theModel;
 
@@ -105,13 +105,13 @@ public class GameView
             return;
         }
 
-        int width = Math.round(getWidth() / model.getSize());
-        int height = Math.round(getHeight() / model.getSize());
+        int width = Math.round(getWidth() / model.getWidth());
+        int height = Math.round(getHeight() / model.getHeight());
         Paint paint1 = new Paint();
         paint1.setStyle(Style.FILL);
-        for (int x = 0; x < model.getSize(); x++)
+        for (int x = 0; x < model.getWidth(); x++)
         {
-            for (int y = 0; y < model.getSize(); y++)
+            for (int y = 0; y < model.getHeight(); y++)
             {
                 paint1.setColor(model.getCell(x, y).getColor());
 

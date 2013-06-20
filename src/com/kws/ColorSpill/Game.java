@@ -19,20 +19,15 @@ import android.util.Log;
  * @version Apr 29, 2012
  */
 
-public class ColorSpill extends Observable {
+public abstract class Game extends Observable {
 	private HashSet<Cell> active;
-	private int size;
-	private int moves;
+	private int width;
+	private int height;
 	private boolean[][] counted;
-	private int maxMoves;
 	private int[] colors = { Color.RED, Color.BLUE, Color.WHITE, Color.MAGENTA,
 			Color.YELLOW, Color.GREEN };
 	private Cell[][] board;
 	private Random random;
-	private boolean timed;
-	private CountDownTimer timer;
-	private long timeLeft;
-	private long maxTime;
 
 	/**
 	 * The constructor for the ColorSpill class.
@@ -42,25 +37,20 @@ public class ColorSpill extends Observable {
 	 * @param maxMoves
 	 *            The maximum moves allowed for the game.
 	 */
-	public ColorSpill(int size, int maxMoves, long maxTime, boolean timed) {
-		this.size = size;
-		this.maxMoves = maxMoves;
-		this.timed = timed;
-		this.maxTime = maxTime;
-		moves = 0;
-		timeLeft = maxTime;
-		board = new Cell[size][size];
+	public Game(int width, int height) {
+		this.width = width;
+		this.height = height;
+		board = new Cell[width][height];
 		active = new HashSet<Cell>();
 		random = new Random();
-		timer = null;
 
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
 				int randomColor = colors[random.nextInt(colors.length)];
 				board[i][j] = new Cell(randomColor, i, j);
 			}
 		}
-
+		/*
 		if (this.timed) {
 			timer = new CountDownTimer(30000, 1000) {
 
@@ -84,7 +74,7 @@ public class ColorSpill extends Observable {
 				}
 			};
 		}
-
+		*/
 		setChanged();
 		notifyObservers();
 	}
@@ -96,7 +86,7 @@ public class ColorSpill extends Observable {
 	 * @return The Active cells.
 	 */
 	public HashSet<Cell> getActiveCells() {
-		counted = new boolean[size][size];
+		counted = new boolean[width][height];
 		active = new HashSet<Cell>();
 		floodcount(0, 0, board[0][0].getColor());
 		return active;
@@ -121,20 +111,24 @@ public class ColorSpill extends Observable {
 	 * @param color
 	 *            The color to join the cells with.
 	 */
-	public void joinNewCells(int color) {
+	public boolean joinNewCells(int color) {
 		Log.i("COLORSPILL", "Join New Cells");
+		
+		if (isGameLost() || isGameWon()){
+			return false;
+		}
+		
 		int before = getActiveCells().size();
 
 		floodfill(0, 0, board[0][0].getColor(), color);
 		if (before != getActiveCells().size()) {
-			if (moves == 0) {
-				Log.i("COLORSPILL", "Timer Start");
-				timer.start();
-			}
-			moves++;
+			setChanged();
+			notifyObservers();
+			return true;
 		}
 		setChanged();
 		notifyObservers();
+		return false;
 	}
 
 	/**
@@ -170,13 +164,7 @@ public class ColorSpill extends Observable {
 	 * 
 	 * @return Whether the game is won or not.
 	 */
-	public boolean isGameWon() {
-		if (!timed) {
-			return getActiveCells().size() == size * size;
-		} else {
-			return getActiveCells().size() == size * size && isTimeLeft();
-		}
-	}
+	public abstract boolean isGameWon();
 
 	/**
 	 * Returns whether the game is lost or not. Max moves reached and board not
@@ -184,60 +172,26 @@ public class ColorSpill extends Observable {
 	 * 
 	 * @return Whether the game is lost or not.
 	 */
-	public boolean isGameLost() {
-		if (!timed) {
-			return moves >= maxMoves && !isGameWon();
-		}
-		return !isTimeLeft() && !isGameWon();
-	}
-
-	public long getTimeLeft() {
-		Log.i("COLORSPILL", "" + timeLeft);
-		return timeLeft;
-	}
-
-	public boolean isTimeLeft() {
-		return (getTimeLeft() != (long) 0);
-	}
+	public abstract boolean isGameLost();
 
 	// ----------------------------------------------------------
 	/**
-	 * Get the board size.
+	 * Get the board width.
 	 * 
-	 * @return size of the board.
+	 * @return width of the board.
 	 */
-	public int getSize() {
-		return size;
+	public int getWidth() {
+		return this.width;
 	}
-
+	
 	// ----------------------------------------------------------
 	/**
-	 * Get the maximum number of moves.
+	 * Get the board height.
 	 * 
-	 * @return - the number of max moves.
+	 * @return height of the board.
 	 */
-	public int getMaxMoves() {
-		return maxMoves;
-	}
-
-	// ----------------------------------------------------------
-	/**
-	 * Get the maximum time.
-	 * 
-	 * @return - the number of max time.
-	 */
-	public long getMaxTime() {
-		return maxTime;
-	}
-
-	// ----------------------------------------------------------
-	/**
-	 * Get Moves.
-	 * 
-	 * @return moves
-	 */
-	public int getMoves() {
-		return moves;
+	public int getHeight() {
+		return this.height;
 	}
 
 	// ----------------------------------------------------------

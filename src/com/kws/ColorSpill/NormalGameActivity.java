@@ -21,7 +21,7 @@ import android.os.Bundle;
 public class NormalGameActivity
     extends Activity
 {
-    private ColorSpill     	model;
+    private NormalGame     	model;
     private GameView 		view;
     private TextView       	status;
 
@@ -35,7 +35,7 @@ public class NormalGameActivity
         setContentView(R.layout.game_layout);
 
         view = (GameView)findViewById(R.id.colorSpillView);
-        model = new ColorSpill(10, 25, 0,false);
+        model = new NormalGame(10, 10, 25);
         view.setModel(model);
 
         status = (TextView)findViewById(R.id.statusLabel);
@@ -214,7 +214,7 @@ public class NormalGameActivity
      * 
      * @return the model
      */
-    public ColorSpill getModel()
+    public Game getModel()
     {
         return model;
     }

@@ -28,6 +28,7 @@ public class MenuActivity extends Activity {
     {
         Intent gameIntent = new Intent(MenuActivity.this,
 				NormalGameActivity.class);
+		finish();
 		MenuActivity.this.startActivity(gameIntent);
 
     }
@@ -42,8 +43,8 @@ public class MenuActivity extends Activity {
     {
     	Intent gameIntent = new Intent(MenuActivity.this,
 				TimedGameActivity.class);
+		finish();
 		MenuActivity.this.startActivity(gameIntent);
-
     }
     
     // ----------------------------------------------------------
